@@ -1,0 +1,2 @@
+# monorepo
+Golang Monorepo guide
