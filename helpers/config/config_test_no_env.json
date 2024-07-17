@@ -1,0 +1,4 @@
+{
+  "httpServerConfig": {"port": "8080"}, 
+  "grpcClientConfigs": {"orders": {"host": "orders", "port": "8081"}}
+}

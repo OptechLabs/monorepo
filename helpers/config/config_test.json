@@ -1,0 +1,20 @@
+{
+  "appName": "test",
+  "rootDomain": "otoslocal.com",
+  "environment": "development",
+  "httpServerConfig": {
+    "port": "8080"
+  },
+  "grpcClientConfigs": {
+    "orders": {
+      "host": "orders",
+      "port": "8081",
+      "googleIAMAudience": "audience"
+    }
+  },
+  "dbConfigs": {
+    "primary": {
+      "connectionURL": "test:url"
+    }
+  }
+}

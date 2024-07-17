@@ -32,6 +32,10 @@ Allright, let's get you oriented to the folder structure.
 
 The services directory contains each individual deployable service. For Golang services, these folders will also include the individual service's go.mod and go.sum files and are actually run from within those folders. You `cd` into those directories and work with them that way, but I find it's easier to put that all in the Makefile in `root` and shortcut your way to nirvana.
 
+***./services/gateway*** - The `gateway` service acts as the outside world's interface to the `core` service containing the lion's share of logic for this very made up system. Because most of my history has been in retail and fulfillment, so the example I'll use is posting a simple ecommerce order to the API. If you've decided to get everything running, issue a post using CURL or Insomnia or Postman (whatever you fancy). You can also use the already made command `Make sendOrderToGateway`
+
+***./services/core*** - The `core` service acts as the place where all the magic happens. Whereas the `gateway` service is meant to access the `core`, the `core` itself is not exposed to the outside world. The power of the monorepo is that you can develop a really effective client library in the `core` folder without having to worry about versions and publishing an all that. Sure, you will need to ensure that you are deploying things separately and not mingling your work between services, but it really just forces good behavior. Making your changes backward compatible, for instance.
+
 ---
 
 ***./dockerfiles***
@@ -50,6 +54,12 @@ As you expect, this is where the Github Actions .yml files live. Each of them ar
 
 This is the main HTTP Server Library I use in Go services. It works with both gRPC and REST services, contains generic logging, and some helpful middleware. Feel free to use it if you're so inclined, but it's a use at your own risk type of deal. While I've used this or a version of it in production for a long time, I may be replacing the innards to the standard http library in the future. That said, it works quite well.
 
+---
+
+***./helpers***
+
+The helpers directory contains generic libraries useful throughout the stack. For example, it contains the `config` library which does some basic loading from a `.json` file and sets reasonable defaults. It's simple, but I hate coding those types of things more than once.
+
 
 Then, make sure you have following installed on your machine. I use [Homebrew](https://brew.sh) on my Mac to install Git, Go, etc.
 1) *Docker* - Running 4.32.0
@@ -57,4 +67,5 @@ Then, make sure you have following installed on your machine. I use [Homebrew](h
 3) *Golang* - Running 1.22.0
 
 Once you've got those 3 items installed, you should be able to run `Make [FILL THIS IN]` to start up the (nearly) empty services locally. Obviously, they will not deploy to GCP or interface with Github Actions, but you can get it running locally fairly easily.
+
 
