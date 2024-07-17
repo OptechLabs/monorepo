@@ -1,0 +1,79 @@
+version: "3"
+services:
+  psql-one:
+    container_name: one.psql
+    image: postgres:15.6-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=service.one
+      - POSTGRES_PASSWORD=haveAtIt
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U service.one -d service_one_development -h localhost -p 5432"
+        ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    volumes:
+      - psql-data:/var/lib/postgresql/data
+
+  psql-two:
+    container_name: two.psql
+    image: postgres:15.6-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=service.two
+      - POSTGRES_PASSWORD=haveAtIt
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U service.two -d service_two_development -h localhost -p 5432"
+        ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    volumes:
+      - psql-data:/var/lib/postgresql/data
+
+  pubsub-emulator:
+    container_name: pubsub.emulator
+    image: google/cloud-sdk:emulators
+    command: "gcloud beta emulators pubsub start --project=monorepo-local --host-port='0.0.0.0:8085'"
+    ports:
+      - "8085:8085"
+
+  service-one:
+    container_name: service.one
+    build:
+      context: .
+      dockerfile: dockerfiles/local/service.one.Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - psql-one
+      - pubsub-emulator
+
+  service-two:
+    container_name: service.two
+    build:
+      context: .
+      dockerfile: dockerfiles/local/service.two.Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - psql-two
+      - pubsub-emulator
+
+volumes:
+  psql-data:
