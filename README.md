@@ -38,11 +38,15 @@ The services directory contains each individual deployable service. For Golang s
 
 *** SPECIAL NOTE ON MONOREPO vs MONOLITH *** - When you're first starting out on a project, the idea of adopting a service oriented architecture can seem a bit anathema to moving fast and reducing complexity, so while this is an example of a monorepo that supports multiple services, the truth is that you can start with just the `core` service and develop everything in one service directory. When it comes time to add something to your overall ecosystem that doesn't belong or should be decoupled from the service, simply add a new  in the service directory, docker files, etc and bob's your uncle, you've got a functioning monorepo with multiple services. Until that time, enjoy a monolith that can flex into services. I always like to say that a service should be as big as it needs to be, neither macro nor micro, but just right.
 
+*** config.json *** - I made a few significant exceptions with this repository, the most noteworthy of which is the commiting of config files to a remote repository. I've also additionally set local db DEV passwords in the makefile, which I normally wouldn't do, instead using variables or uncommited local files. But that makes these types of repos all types of hard to follow, so do the right thing, exclude your `.env`, `config.json`, and passwords from your repos.
+
+*ALSO...I never, not even for a teaching repo like this, commit a password or config that could jeapordize the security of a Github or GCP account. You'll note that the github/workflows directory has secret references in the important parts.*
+
 ---
 
 ***./dockerfiles***
 
-I keep a `local` and `remote` subdirectories under the dockerfiles directory. Locally, I work with `.env` or `.yml` config files that are not committed into the repo for deployment. Because of that, the local docker file does a little bit more work than than the remote version. For instance, it copies local config files and secrets and sets environment variables that the Google Cloud Vault and Cloud Run settings handle. This is by design.
+I keep a `local` and `remote` subdirectory under the dockerfiles directory. Locally, I work with `.env` or `.yml` config files that are not committed into the repo for deployment. Because of that, the local docker file does a little bit more work than than the remote version. For instance, it copies local config files and secrets and sets environment variables that the Google Cloud Vault and Cloud Run settings handle. This is by design.
 
 ---
 
@@ -60,7 +64,7 @@ This is the main HTTP Server Library I use in Go services. It works with both gR
 
 ***./helpers***
 
-The helpers directory contains generic libraries useful throughout the stack. For example, it contains the `config` library which does some basic loading from a `.json` file and sets reasonable defaults. It's simple, but I hate coding those types of things more than once.
+The helpers directory contains generic libraries useful throughout the stack. For example, it contains the `config` library which does some basic loading from a `json` file and sets reasonable defaults. It's simple, but I hate coding those types of things more than once.
 
 
 Then, make sure you have following installed on your machine. I use [Homebrew](https://brew.sh) on my Mac to install Git, Go, etc.
@@ -68,6 +72,6 @@ Then, make sure you have following installed on your machine. I use [Homebrew](h
 2) *Git* - Running 2.32.0
 3) *Golang* - Running 1.22.0
 
-Once you've got those 3 items installed, you should be able to run `Make [FILL THIS IN]` to start up the (nearly) empty services locally. Obviously, they will not deploy to GCP or interface with Github Actions, but you can get it running locally fairly easily.
+Once you've got those 3 items installed, you should be able to run `make composeAllNoLogs` to start up the (nearly) empty services locally. Obviously, they will not deploy to GCP or interface with Github Actions, but you can get it running locally fairly easily.
 
 
