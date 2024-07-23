@@ -1,0 +1,9 @@
+{
+  "appName": "core",
+  "rootDomain": "core.com:3000",
+  "environment": "development",
+  "googleProjectID": "monorepo-local",
+  "httpServerConfig": {
+    "port": "8080"
+  }
+}

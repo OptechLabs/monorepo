@@ -11,13 +11,13 @@ This repo holds a skeleton for an easy to use and deploy, containerized multi-se
 And to that I'll say, "Great Question, dear reader." We started a project at the beginning of 2024 at Optech Group under our Optech Labs moniker and when I started, I was determined to implement some of the hard won lessons from starting fresh at my last company. So, like any good engineer, I started piecing it all together through weeks and weeks of research, trial and error, and asking smart people I know what they'd do. This repo is the result of those learnings, coalesced into one cohesive repository, in the hopes that you, whoever you may be, will be able to use this as a shortcut. Use it at your discretion and with all of my best wishes.
 
 ### The Technology in Play
-1) *Mac OS* - I develop on a Macbook Pro, Apple M1 Max Chip. Somethings I take for granted because of that, so take that into consideration when using this repo.
-2) *Make* - Originally I started the monorepo with Basil, but it had a steeper learning curve than I was willing to climb (and then manage), so I switched to the tried and true Makefile and Go Modules to make working easy and standard.
-3) *Docker Compose* - This is for easy local development. I am probably not leveraging to its full capability, but boy does it make my life easy.
-4) *Docker* - Put everything in a container and make deployments work for you, not against you. This really isn't a controversial take, but I started building software 20+ years ago, so it's still pretty awesome to me even though I've been doing it a really long time. 
-5) *Github Actions* - This controls all of the CI/CD functions and interfaces with Google Cloud Platform for deployments, etc (which I prefer over AWS)
-6) *Golang* - I build in Go, so a lot of the stuff in here will be particularly useful for the Go engineer (or the engineer who wants to get into Go). That said...there are a lot fungible ideas that anyone can leverage in any ecosystem.
-7) *Gin* - For now, I'm using the Gin http server library, but will most likely update to the native server in the future.
+1) *Mac OS* - I develop on a Macbook Pro, Apple M1 Max Chip. I take some things for granted because of that, so take that into consideration when using this repo.
+2) *Make* - Originally I started the monorepo with Basil, but it had a steeper learning curve than I was willing to climb (and then manage), so I switched to the tried and true Makefile with Go Modules to make working easy and standard.
+3) *Docker Compose* - This is for improved local development. I am probably not leveraging to its full capability, but boy does it make my life easy.
+4) *Docker* - Put everything in a container and make deployments work for you, not against you. This really isn't a controversial take, but I started building software 20+ years ago when this type of thing wasn't de rigeur, so it's still pretty awesome to me even though I've been doing it a really long time. 
+5) *Github Actions* - This controls all of the CI/CD functions and interfaces with Google Cloud Platform for deployments, etc (which I prefer over AWS).
+6) *Golang* - I build in Go, so a lot of the stuff in here will be particularly useful for the Go engineer (or the engineer who wants to get into Go). That said...there are a lot fungible ideas that anyone can leverage in any ecosystem and the infrastructure to support development and deployment will work for any type of language in the services directory, as long as compilation and containerization works.
+7) *Gin* - For now, I'm using the Gin http server library, but will most likely update to the newer golang native server in the future.
 
 ### So How do I get started?
 Allright, let's get you oriented to the folder structure.
@@ -35,6 +35,8 @@ The services directory contains each individual deployable service. For Golang s
 ***./services/gateway*** - The `gateway` service acts as the outside world's interface to the `core` service containing the lion's share of logic for this very made up system. Because most of my history has been in retail and fulfillment, so the example I'll use is posting a simple ecommerce order to the API. If you've decided to get everything running, issue a post using CURL or Insomnia or Postman (whatever you fancy). You can also use the already made command `Make sendOrderToGateway`
 
 ***./services/core*** - The `core` service acts as the place where all the magic happens. Whereas the `gateway` service is meant to access the `core`, the `core` itself is not exposed to the outside world. The power of the monorepo is that you can develop a really effective client library in the `core` folder without having to worry about versions and publishing an all that. Sure, you will need to ensure that you are deploying things separately and not mingling your work between services, but it really just forces good behavior. Making your changes backward compatible, for instance.
+
+*** SPECIAL NOTE ON MONOREPO vs MONOLITH *** - When you're first starting out on a project, the idea of adopting a service oriented architecture can seem a bit anathema to moving fast and reducing complexity, so while this is an example of a monorepo that supports multiple services, the truth is that you can start with just the `core` service and develop everything in one service directory. When it comes time to add something to your overall ecosystem that doesn't belong or should be decoupled from the service, simply add a new  in the service directory, docker files, etc and bob's your uncle, you've got a functioning monorepo with multiple services. Until that time, enjoy a monolith that can flex into services. I always like to say that a service should be as big as it needs to be, neither macro nor micro, but just right.
 
 ---
 

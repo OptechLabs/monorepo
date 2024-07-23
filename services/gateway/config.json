@@ -1,0 +1,9 @@
+{
+  "appName": "gateway",
+  "rootDomain": "gateway.com:3000",
+  "environment": "development",
+  "googleProjectID": "monorepo-local",
+  "httpServerConfig": {
+    "port": "3000"
+  }
+}
