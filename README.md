@@ -74,4 +74,12 @@ Then, make sure you have following installed on your machine. I use [Homebrew](h
 
 Once you've got those 3 items installed, you should be able to run `make composeAllNoLogs` to start up the (nearly) empty services locally. Obviously, they will not deploy to GCP or interface with Github Actions, but you can get it running locally fairly easily.
 
+# To Test it #
+You can see that the servers are running by executing the following:
+`make statusGateway` - Checks the status of the Gateway service.
+`make statusCore` - Checks the status of the Core service.
+`make psqlGateway` - Connects to the Gateway Dev DB.
+`make psqlCore` - Connects to the Core Dev DB.
+
+*Also, you can just look in the logs in the Docker Desktop application.*
 
