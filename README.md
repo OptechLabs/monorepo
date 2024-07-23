@@ -76,10 +76,10 @@ Once you've got those 3 items installed, you should be able to run `make compose
 
 # To Test it #
 You can see that the servers are running by executing the following:
-`make statusGateway` - Checks the status of the Gateway service.
-`make statusCore` - Checks the status of the Core service.
-`make psqlGateway` - Connects to the Gateway Dev DB.
-`make psqlCore` - Connects to the Core Dev DB.
+1) `make statusGateway` - Checks the status of the Gateway service.
+2) `make statusCore` - Checks the status of the Core service.
+3) `make psqlGateway` - Connects to the Gateway Dev DB.
+4) `make psqlCore` - Connects to the Core Dev DB.
 
 *Also, you can just look in the logs in the Docker Desktop application.*
 
