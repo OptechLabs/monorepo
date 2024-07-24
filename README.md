@@ -1,7 +1,7 @@
 # Optech Labs Golang Monorepo Example 
 ### *by Christopher Hazlett, CTO/Co-founder @ Optech Group*
 
-*I've written a Medium article to cover the whys and wherefores of this Monorepo example. Feel free to start there for greater context. However, this repo, the READMEs and comments should suffice unless you like a bit of a story to go along with your sample repos.*
+*I've written a [Medium Article](https://medium.com/@chrishazlett/how-to-build-a-friendly-monorepo-for-golang-services-92c8a62f3b9a) to cover the whys and wherefores of this Monorepo example. Feel free to start there for greater context. However, this repo, the READMEs and comments should suffice unless you like a bit of a story to go along with your sample repos.*
 
 ---
 
