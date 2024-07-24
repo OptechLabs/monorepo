@@ -7,9 +7,6 @@ import (
 	"github.com/OptechLabs/monorepo/foundation"
 	config "github.com/OptechLabs/monorepo/helpers/config"
 	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
-
-	_ "github.com/golang-migrate/migrate/v4/source/google_cloud_storage"
 )
 
 func New(

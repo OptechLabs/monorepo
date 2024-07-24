@@ -1,4 +1,4 @@
-# conditional root directory variables
+# ------ conditional root directory variables ---------
 # -----------------------------------------------------
 %Gateway: ACTIVEDIR:=services/gateway
 %Gateway: PRIMARYPORT:=8080
@@ -24,7 +24,7 @@
 
 %Helpers: ACTIVEDIR:=helpers
 %Foundation: ACTIVEDIR:=foundation
-# -----------------------------------------------------
+# -------------------------------------------------------
 
 ## This will restart the entire docker compose stack.
 composeAllAndWatchLogs:
