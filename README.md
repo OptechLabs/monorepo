@@ -82,4 +82,3 @@ You can see that the servers are running by executing the following:
 4) `make psqlCore` - Connects to the Core Dev DB.
 
 *Also, you can just look in the logs in the Docker Desktop application.*
-
